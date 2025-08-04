@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriRoots - Smart Farming Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-image: url('agri2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+           font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .chat-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .chat-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .chat-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .bot-avatar {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .user-avatar {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .bot-message {
+            background: white;
+            border: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .quick-actions {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-btn {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 20px;
+            max-width: 70%;
+            border: 1px solid #e0e0e0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .feature-card {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .chat-container {
+                height: 80vh;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">AGRIROOTS</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="home">Home</button>
+
+            <button class="nav-btn" id="product">Products</button>
+            <button class="nav-btn" id="contact">Contact</button>
+            <button class="nav-btn" id="help">Help</button>
+            <button class="nav-btn" id="profile">Profile</button>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">🌱 AgriRoots Smart Farming Assistant</div>
+            <div class="chat-subtitle">Your AI-powered farming companion for optimal crop management</div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message">
+                <div class="message-avatar bot-avatar">🤖</div>
+                <div class="message-content bot-message">
+                    <div class="feature-title">Welcome to AgriRoots Smart Farming! 🌾</div>
+                    I'm your intelligent farming assistant, powered by IoT sensors and AI technology. I can help you with:
+                    <div class="feature-card">
+                        <div class="feature-title">🍅 Crop Management</div>
+                        Tomato growth stages, watering schedules, and fertilization timelines
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🌡️ Environmental Monitoring</div>
+                        Weather data, soil conditions, and climate control automation
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">👁️ Disease Detection</div>
+                        Early identification and treatment of plant diseases
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">📊 Yield Prediction</div>
+                        Harvest timing and quantity estimation using computer vision
+                    </div>
+                    How can I assist you with your farming today?
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('What are tomato growth stages?')">Growth Stages</button>
+            <button class="quick-btn" onclick="sendQuickMessage('How to detect plant diseases?')">Disease Detection</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Watering schedule for tomatoes')">Watering Guide</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Soil monitoring tips')">Soil Health</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Weather predictions')">Weather Data</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Fertilization schedule')">Fertilization</button>
+        </div>
+
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask me about farming, crop management, or plant care..." onkeypress="handleEnter(event)">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+
+        // Smart farming knowledge base
+        const farmingKnowledge = {
+            'growth stages': {
+                title: '🌱 Tomato Growth Stages',
+                content: `Tomatoes go through 5 main growth stages:
+
+**1. Seedling Stage (0-2 weeks)**
+- Seeds germinate and first leaves appear
+- Keep soil moist but not waterlogged
+- Temperature: 70-75°F (21-24°C)
+- Light: 14-16 hours of artificial light
+
+**2. Vegetative Stage (3-6 weeks)**
+- Rapid leaf and stem growth
+- Increase watering frequency
+- Start light fertilization with nitrogen-rich fertilizer
+- Temperature: 65-70°F (18-21°C)
+
+**3. Flowering Stage (6-8 weeks)**
+- First flowers appear
+- Reduce nitrogen, increase phosphorus
+- Maintain consistent soil moisture
+- Support plants with stakes or cages
+
+**4. Fruiting Stage (8-12 weeks)**
+- Fruits develop and grow
+- Increase potassium for fruit development
+- Monitor for pests and diseases
+- Maintain steady watering schedule
+
+**5. Harvesting Stage (12+ weeks)**
+- Fruits ripen and ready for harvest
+- Reduce watering slightly
+- Regular harvesting encourages more production`
+            },
+            'disease': {
+                title: '🔍 Plant Disease Detection',
+                content: `Our AI-powered system can detect common tomato diseases:
+
+**Early Blight**
+- Brown spots with concentric rings on leaves
+- Treatment: Copper fungicide, improve air circulation
+
+**Late Blight**
+- Dark, water-soaked spots on leaves and stems
+- Treatment: Remove affected plants, apply fungicide
+
+**Bacterial Wilt**
+- Wilting despite adequate moisture
+- Treatment: Remove infected plants, sterilize soil
+
+**Mosaic Virus**
+- Yellow and green mottled leaves
+- Treatment: Remove infected plants, control aphids
+
+**Prevention Tips:**
+- Regular monitoring with computer vision
+- Maintain proper spacing for air circulation
+- Water at soil level, not on leaves
+- Rotate crops annually`
+            },
+            'watering': {
+                title: '💧 Smart Watering Schedule',
+                content: `Our IoT sensors automatically manage irrigation:
+
+**Seedling Stage:** Light, frequent watering
+- Soil moisture: 60-70%
+- Frequency: 2-3 times daily, light amounts
+
+**Vegetative Stage:** Deep, less frequent watering
+- Soil moisture: 70-80%
+- Frequency: Once daily, deep watering
+
+**Flowering Stage:** Consistent moisture
+- Soil moisture: 75-85%
+- Frequency: Daily, consistent amounts
+
+**Fruiting Stage:** Regular, deep watering
+- Soil moisture: 80-90%
+- Frequency: Daily, increase volume
+
+**Automated Features:**
+- Soil moisture sensors trigger irrigation
+- Weather data adjusts watering schedule
+- Different zones can have custom schedules
+- Mobile alerts for system status`
+            },
+            'soil': {
+                title: '🌍 Soil Health Monitoring',
+                content: `Our sensor network monitors key soil parameters:
+
+**Soil Moisture:**
+- Optimal range: 70-85% for tomatoes
+- Capacitive sensors provide accurate readings
+- Automated irrigation triggers
+
+**pH Levels:**
+- Optimal range: 6.0-6.8 for tomatoes
+- Automated pH monitoring and alerts
+- Lime/sulfur recommendations for adjustment
+
+**Temperature:**
+- Optimal range: 65-75°F (18-24°C)
+- Heating/cooling system integration
+- Mulching recommendations
+
+**Nutrient Levels:**
+- NPK monitoring (Nitrogen, Phosphorus, Potassium)
+- Automated fertilizer recommendations
+- Organic matter content tracking
+
+**Real-time Alerts:**
+- Mobile notifications for parameter changes
+- Automated corrective actions
+- Historical data analysis for trends`
+            },
+            'weather': {
+                title: '🌤️ Weather Integration System',
+                content: `Real-time weather monitoring and predictions:
+
+**Current Conditions:**
+- Temperature, humidity, wind speed
+- UV index and solar radiation
+- Barometric pressure trends
+
+**Rain Prediction:**
+- 7-day precipitation forecasts
+- Automatic irrigation adjustments
+- Protective covering alerts
+
+**Climate Control:**
+- Automated greenhouse ventilation
+- Heating/cooling system management
+- LED grow light scheduling
+
+**Frost Protection:**
+- Early warning alerts
+- Automatic heating activation
+- Protective covering deployment
+
+**Data Sources:**
+- Multiple weather API integrations
+- On-site weather station data
+- Microclimate monitoring sensors`
+            },
+            'fertilization': {
+                title: '🌿 Smart Fertilization Schedule',
+                content: `AI-optimized nutrient management:
+
+**Seedling Stage (Weeks 0-2):**
+- Light liquid fertilizer (1/4 strength)
+- High in phosphorus for root development
+- Frequency: Weekly applications
+
+**Vegetative Stage (Weeks 3-6):**
+- Balanced NPK fertilizer (10-10-10)
+- Higher nitrogen for leaf growth
+- Frequency: Bi-weekly applications
+
+**Flowering Stage (Weeks 6-8):**
+- Reduce nitrogen, increase phosphorus
+- Fertilizer ratio: 5-10-10
+- Add calcium to prevent blossom end rot
+
+**Fruiting Stage (Weeks 8+):**
+- High potassium for fruit development
+- Fertilizer ratio: 5-10-15
+- Continue calcium supplementation
+
+**Automated Features:**
+- Soil nutrient analysis
+- Precise fertilizer mixing and application
+- Growth stage detection via computer vision
+- Custom nutrition plans per plant variety`
+            }
+        };
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+
+            addMessage('user', message);
+            chatInput.value = '';
+            
+            setTimeout(() => {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const response = generateResponse(message);
+                    addMessage('bot', response.content, response.title);
+                }, 1500);
+            }, 500);
+        }
+
+        function sendQuickMessage(message) {
+            chatInput.value = message;
+            sendMessage();
+        }
+
+        function addMessage(sender, content, title = '') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = `message-avatar ${sender}-avatar`;
+            avatar.textContent = sender === 'user' ? '👤' : '🤖';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = `message-content ${sender}-message`;
+            
+            if (title) {
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'feature-title';
+                titleDiv.textContent = title;
+                messageContent.appendChild(titleDiv);
+            }
+            
+            // Convert markdown-like formatting to HTML
+            const formattedContent = content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+            
+            messageContent.innerHTML = title ? messageContent.innerHTML + formattedContent : formattedContent;
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message';
+            typingDiv.id = 'typing-indicator';
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar bot-avatar';
+            avatar.textContent = '🤖';
+            
+            const typingContent = document.createElement('div');
+            typingContent.className = 'typing-indicator';
+            typingContent.style.display = 'flex';
+            typingContent.innerHTML = '<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+            
+            typingDiv.appendChild(avatar);
+            typingDiv.appendChild(typingContent);
+            
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function generateResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check for keywords and return appropriate responses
+            if (lowerMessage.includes('growth') || lowerMessage.includes('stage')) {
+                return farmingKnowledge['growth stages'];
+            } else if (lowerMessage.includes('disease') || lowerMessage.includes('pest') || lowerMessage.includes('sick')) {
+                return farmingKnowledge['disease'];
+            } else if (lowerMessage.includes('water') || lowerMessage.includes('irrigation')) {
+                return farmingKnowledge['watering'];
+            } else if (lowerMessage.includes('soil') || lowerMessage.includes('ph') || lowerMessage.includes('moisture')) {
+                return farmingKnowledge['soil'];
+            } else if (lowerMessage.includes('weather') || lowerMessage.includes('rain') || lowerMessage.includes('temperature')) {
+                return farmingKnowledge['weather'];
+            } else if (lowerMessage.includes('fertiliz') || lowerMessage.includes('nutrient') || lowerMessage.includes('npk')) {
+                return farmingKnowledge['fertilization'];
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                return {
+                    title: '👋 Hello there!',
+                    content: 'Welcome to AgriRoots! I\'m here to help you with all aspects of smart farming. You can ask me about crop management, disease detection, watering schedules, soil health, weather monitoring, or fertilization. What would you like to know?'
+                };
+            } else if (lowerMessage.includes('help')) {
+                return {
+                    title: '🆘 How I Can Help',
+                    content: 'I can assist you with:\n\n• **Crop Management** - Growth stages, care tips\n• **Disease Detection** - Identify and treat plant diseases\n• **Watering Systems** - Automated irrigation schedules\n• **Soil Health** - pH, moisture, and nutrient monitoring\n• **Weather Integration** - Real-time data and predictions\n• **Fertilization** - Smart nutrient management\n\nJust ask me about any farming topic!'
+                };
+            } else {
+                return {
+                    title: '🤔 Let me help you with that',
+                    content: `I understand you're asking about "${message}". While I might not have specific information about that exact topic, I can help you with:\n\n• Tomato growth stages and care\n• Plant disease identification and treatment\n• Smart watering and irrigation systems\n• Soil health monitoring\n• Weather-based farming decisions\n• Fertilization schedules\n\nTry asking about any of these topics, or use the quick action buttons below!`
+                };
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Auto-focus on input
+        chatInput.focus();
+         document.getElementById('product').addEventListener('click', function() {
+                            window.location.href = 'product.html';
+                        });
+  document.getElementById('home').addEventListener('click', function() {
+                            window.location.href = 'ui.html';
+                        });            
+                         document.getElementById("help").addEventListener("click", function() {
+            window.location.href = "help.html";
+        });   
+                       
+                         document.getElementById("profile").addEventListener("click", function() {
+            window.location.href = "profile.html";
+        });   
+                         document.getElementById("contact").addEventListener("click", function() {
+            window.location.href = "contact.html";
+        });   
+
+    </script>
+</body>
+</html>

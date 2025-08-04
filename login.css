@@ -1,0 +1,87 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url(agri2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-image: url(agri1.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+}
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.toggle button {
+  background: transparent;
+  color: #ddd;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.toggle button:hover {
+  border-color: #09f;
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+}
+
+.form.active {
+  display: flex;
+}
+
+input, button {
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+}
+
+input {
+  background: #444;
+  color: #fff;
+}
+
+button[type="submit"] {
+  background: #09f;
+  color: #fff;
+  cursor: pointer;
+}
+#showLogin {
+  color: green;
+  text-wrap: nowrap;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+#showRegister {
+  color: green;
+  text-wrap: nowrap;
+    font-weight: bold;
+    font-size: 1.2rem;
+}

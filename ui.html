@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGRIROOTS - Smart Plant Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">AGRIROOTS</div>
+                <nav class="nav-menu">
+                    <a href="ui.html" class="nav-item" id="home">Home</a>
+                    <a href="product.html" class="nav-item" id="product">products</a>
+                   
+                    <a href="#" class="nav-item" id="contact">contact</a>
+                    <a href="#" class="nav-item" id="help">help</a>
+                    <a href="#" class="nav-item" id="profile">profile</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="plant-details-section">
+                <h2 class="section-title">Plant Details</h2>
+                <div class="detail-buttons">
+                    <button class="detail-btn active" onclick="showContent('growth')">
+                        🌱 Growth level of the plants details
+                    </button>
+                    <button class="detail-btn" onclick="showContent('health')">
+                        💚 Health of the plants details
+                    </button>
+                    <button class="detail-btn" onclick="showContent('climate')">
+                        🌧️ Rain excepted climate details
+                    </button>
+                    <button class="detail-btn" onclick="showContent('nutrient')">
+                        🧪 Nutrient level of the plant details
+                    </button>
+                    <button class="detail-btn" onclick="showContent('watering')">
+                        💧 Watering flows details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="stats-card">
+                    <div class="stats-value">24°C</div>
+                    <div class="stats-label">Temperature</div>
+                </div>
+                <div class="stats-card">
+                    <div class="stats-value">65%</div>
+                    <div class="stats-label">Humidity</div>
+                </div>
+                <div class="stats-card">
+                    <div class="stats-value">7.2</div>
+                    <div class="stats-label">pH Level</div>
+                </div>
+                <div class="stats-card">
+                    <div class="stats-value">18</div>
+                    <div class="stats-label">Active Plants</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Display Areas -->
+        <div id="growth-content" class="content-display active">
+            <div class="content-header">
+                🌱 Plant Growth Monitoring
+            </div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Average Height</div>
+                    <div class="metric-value">15.4 cm</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 77%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Growth Rate</div>
+                    <div class="metric-value">2.1 cm/week</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Leaf Development</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>Excellent
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Root System</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>Healthy
+                    </div>
+                </div>
+            </div>
+            <p>Growth monitoring shows excellent progress across all plant specimens. Root development is strong and leaf formation is ahead of schedule.</p>
+        </div>
+
+        <div id="health-content" class="content-display">
+            <div class="content-header">
+                💚 Plant Health Assessment
+            </div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Overall Health Score</div>
+                    <div class="metric-value">92/100</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Disease Detection</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>None Detected
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Pest Activity</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-warning"></span>Low Risk
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Stress Indicators</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>Minimal
+                    </div>
+                </div>
+            </div>
+            <p>Plants are showing excellent health indicators with no signs of disease. Minor pest activity detected but within acceptable ranges.</p>
+        </div>
+
+        <div id="climate-content" class="content-display">
+            <div class="content-header">
+                🌧️ Climate & Weather Forecast
+            </div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Expected Rainfall</div>
+                    <div class="metric-value">15mm</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Rain Probability</div>
+                    <div class="metric-value">78%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">UV Index</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-warning"></span>Moderate (6)
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Wind Speed</div>
+                    <div class="metric-value">12 km/h</div>
+                </div>
+            </div>
+            <p>Weather conditions are favorable for plant growth. Expected rainfall will reduce irrigation needs. UV levels require moderate protection.</p>
+        </div>
+
+        <div id="nutrient-content" class="content-display">
+            <div class="content-header">
+                🧪 Soil Nutrient Analysis
+            </div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Nitrogen (N)</div>
+                    <div class="metric-value">45 ppm</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Phosphorus (P)</div>
+                    <div class="metric-value">32 ppm</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 64%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Potassium (K)</div>
+                    <div class="metric-value">58 ppm</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Soil pH</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>7.2 (Optimal)
+                    </div>
+                </div>
+            </div>
+            <p>Nutrient levels are well-balanced. Phosphorus levels could benefit from slight supplementation in the next feeding cycle.</p>
+        </div>
+
+        <div id="watering-content" class="content-display">
+            <div class="content-header">
+                💧 Irrigation System Status
+            </div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Soil Moisture</div>
+                    <div class="metric-value">68%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 68%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Water Flow Rate</div>
+                    <div class="metric-value">2.5 L/min</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Next Watering</div>
+                    <div class="metric-value">In 4 hours</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">System Status</div>
+                    <div class="metric-value">
+                        <span class="status-indicator status-good"></span>Operating
+                    </div>
+                </div>
+            </div>
+            <p>Irrigation system is functioning optimally. Soil moisture levels are ideal. Next scheduled watering will occur automatically based on sensor readings.</p>
+        </div>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <h2 class="about-title">About us</h2>
+            <div class="about-content">
+                <p>AGRIROOTS is a cutting-edge smart agriculture platform that empowers farmers and plant enthusiasts with real-time monitoring and intelligent insights. Our advanced sensor network and AI-driven analytics help optimize plant growth, health, and resource management.</p>
+                <br>
+                <p>From monitoring soil nutrients to predicting weather patterns, AGRIROOTS provides comprehensive plant care solutions that maximize yield while minimizing resource waste. Join thousands of growers who trust AGRIROOTS for smarter, more sustainable agriculture.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

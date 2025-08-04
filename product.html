@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGRIROOTS - Enter Plant Details</title>
+    <link rel="stylesheet" href="product.css">
+   
+</head>
+<body>
+    <header class="header">
+        <div class="logo">AGRIROOTS</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="home">Home</button>
+            <button class="nav-btn" id="product">Products</button>
+            <button class="nav-btn" id="contact">Contact</button>
+            <button class="nav-btn" id="help">Help</button>
+            <button class="nav-btn" id="profile">Profile</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="form-card">
+            <h1 class="form-title">Enter the Plant Details</h1>
+            
+            <form id="plantForm">
+                <div class="form-group">
+                    <label for="plantName" class="form-label">Plant Name:</label>
+                    <input type="text" id="plantName" name="plantName" class="form-input" placeholder="Enter the name of your plant" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldSize" class="form-label">Field Size:</label>
+                    <input type="text" id="fieldSize" name="fieldSize" class="form-input" placeholder="Enter field size (e.g., 2 acres, 500 sq meters)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="plantCount" class="form-label">How Many Plants Are Planted:</label>
+                    <input type="text" id="plantCount" name="plantCount" class="form-input" placeholder="Enter number of plants" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="plantImage" class="form-label">Upload Image of the Plant:</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="plantImage" name="plantImage" class="file-input" accept="image/*" onchange="previewImage(this)">
+                        <div class="file-input-display">
+                            <div class="file-input-text">
+                                <span class="upload-icon">📷</span>
+                                <div>Click to upload plant image</div>
+                                <small>PNG, JPG, GIF up to 10MB</small>
+                            </div>
+                        </div>
+                    </div>
+                    <img id="imagePreview" class="preview-image" style="display: none;">
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Plant Details</button>
+            </form>
+        </div>
+    </div>
+
+   <script src="product.js"></script>
+</body>
+</html>
